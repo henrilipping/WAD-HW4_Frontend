@@ -17,63 +17,61 @@ export default {
   data() {
     return {
       post: {
-        id: null,
-        body: ""
-      },
+        id: '',
+        body: ''
+      }
     };
   },
   methods: {
-    fetchPost() {
-      const postId = this.$route.params.id;
-      console.log("Fetching post with ID: ", postId)
-      fetch(`http://localhost:3000/posts/${postId}`, {
+    fetchPost(id) {
+      console.log("Fetching post with ID: ", id)
+      fetch(`http://localhost:3000/posts/${id}`, {
           credentials: 'include'
         })
         .then((response) => response.json())
-        .then(data => {
-          console.log("Fetched post: ", data);
-          this.post = data;
+        .then((data) => {
+          console.log("Fetched post: ", data.body);
+          this.post.id = data.id;
+          this.post.body = data.body;
         })
-        .catch(err => console.log(err.message))
+        .catch((err) => console.log(err.message))
     },
     
     updatePost() {
-      const postId = this.$route.params.id;
-      var data = {
-        body: this.post.body
-      };
-      fetch(`http://localhost:3000/posts/${postId}`, {
+      fetch(`http://localhost:3000/posts/${this.post.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify(data)
+        body: JSON.stringify({ body: this.post.body })
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Post updated', data);
+      .then(response => {
+        console.log(response.data);
         this.$router.push('/');
       })
       .catch(err => console.log(err.message));
     },
 
     deletePost() {
-      const postId = this.$route.params.id;
-      fetch(`http://localhost:3000/posts/${postId}`, {
+      fetch(`http://localhost:3000/posts/${this.post.id}`, {
         method: "DELETE",
-        credentials: 'include'
+        credentials: 'include',
+        headers: { "Content-Type": "application/json" }
       })
-      .then(() => this.$router.push('/'))
+      .then((response) => {
+        console.log(response.data);
+        this.$router.push('/')
+      })
       .catch(err => console.log(err.message));
     }
   },
   mounted() {
-    this.fetchPost();
+    this.fetchPost(this.$route.params.id);
   }
 }
 </script>
 
 <style scoped>
-  .form {
+.form {
   max-width: 420px;
   margin: 30px auto;
   background: rgb(214, 197, 161);

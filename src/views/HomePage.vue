@@ -52,7 +52,7 @@ export default {
       });
     },
 
-    fetchPosts() {
+    async fetchPosts() {
       fetch('http://localhost:3000/posts', {
           credentials: 'include'
         })
@@ -72,6 +72,7 @@ export default {
     },
 
     openPost(id) {
+      console.log("opening post with ID: ", id)
       this.$router.push(`/apost/${id}`);
     },
 
@@ -79,7 +80,7 @@ export default {
       this.$router.push("/addpost");
     },
 
-    deleteAllPosts() {
+    async deleteAllPosts() {
       fetch("http://localhost:3000/posts", {
         method: "DELETE",
         credentials: 'include'
@@ -100,9 +101,6 @@ export default {
     box-sizing: border-box;
 }
 
-main {
-  min-width: 200px;
-}
 .post {
     background-color: #d3d3d3;
     border-radius: 10px;
@@ -135,11 +133,13 @@ main {
     background-color: #bfbfbf;
     margin: 3px;
     border-radius: 10px;
+    max-width: 100px;
 }
 
 main {
     display: flex;
     flex-direction: column;
+    flex:1;
     gap: 20px;
     margin: 3px;
 }
@@ -159,6 +159,7 @@ main {
     }
     main {
         margin: 10px;
+        justify-content: center;
     }
 }
 
