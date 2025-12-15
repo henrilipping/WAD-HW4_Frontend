@@ -1,13 +1,12 @@
 <template>
-    <div class="form">
-    <h3>A Post</h3>
+  <div class="form">
+    <h3>Add Post</h3>
     <div class="row">
       <label for="body">Body</label>
       <textarea name="body" v-model="post.body"></textarea>
     </div>
     <div class="container">
-      <button @click="updatePost" class="center">Update</button>
-      <button @click="deletePost" class="center">Delete</button>
+      <button @click="addPost" class="center">Add</button>
     </div>
   </div>
 </template>
@@ -17,56 +16,25 @@ export default {
   data() {
     return {
       post: {
-        id: '',
         body: ''
       }
     };
   },
   methods: {
-    fetchPost(id) {
-      console.log("Fetching post with ID: ", id)
-      fetch(`http://localhost:3000/posts/${id}`, {
-          credentials: 'include'
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Fetched post: ", data.body);
-          this.post.id = data.id;
-          this.post.body = data.body;
-        })
-        .catch((err) => console.log(err.message))
-    },
-    
-    updatePost() {
-      fetch(`http://localhost:3000/posts/${this.post.id}`, {
-        method: 'PUT',
+    addPost() {
+      fetch(`http://localhost:3000/posts`, {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({ body: this.post.body })
       })
-      .then(response => {
-        console.log(response.data);
-        this.$router.push('/');
-      })
-      .catch(err => console.log(err.message));
+          .then(response => {
+            console.log(response.data);
+            this.$router.push('/');
+          })
+          .catch(err => console.log(err.message));
     },
-
-    deletePost() {
-      fetch(`http://localhost:3000/posts/${this.post.id}`, {
-        method: "DELETE",
-        credentials: 'include',
-        headers: { "Content-Type": "application/json" }
-      })
-      .then((response) => {
-        console.log(response.data);
-        this.$router.push('/')
-      })
-      .catch(err => console.log(err.message));
-    }
   },
-  mounted() {
-    this.fetchPost(this.$route.params.id);
-  }
 }
 </script>
 

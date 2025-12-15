@@ -4,6 +4,7 @@ import SignUp from "@/views/SignUp.vue";
 import LogIn from "@/views/LogIn.vue";
 import APost from "@/views/APost.vue";
 import auth from "@/auth";
+import AddPost from "@/views/AddPost.vue";
 
 const routes = [
     {
@@ -12,6 +13,7 @@ const routes = [
         component: HomePage,
         beforeEnter: async (to, from, next) => {
             let authResult = await auth.authenticated();
+
             if (!authResult) {
                 next("/login");
             } else {
@@ -30,7 +32,7 @@ const routes = [
     component: LogIn,
     },
     {
-    path: '/about',
+    path: '/contact',
     name: 'about',
     component: () => import('../views/AboutView.vue')
     },
@@ -39,6 +41,19 @@ const routes = [
     name: 'APost',
     component: APost,
     beforeEnter: async (to, from, next) => {
+            let authResult = await auth.authenticated();
+            if (!authResult) {
+                next("/login");
+            } else {
+                next();
+            }
+        },
+    },
+    {
+        path: '/addpost',
+        name: 'AddPost',
+        component: AddPost,
+        beforeEnter: async (to, from, next) => {
             let authResult = await auth.authenticated();
             if (!authResult) {
                 next("/login");

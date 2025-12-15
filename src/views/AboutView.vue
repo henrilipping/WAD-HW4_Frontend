@@ -1,5 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Contact us at email</h1>
+    <h2>app@email.com</h2>
   </div>
 </template>

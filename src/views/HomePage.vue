@@ -90,7 +90,12 @@ export default {
   }, 
   mounted() {
     this.fetchPosts();
-  }
+  },
+  // watch: {
+  //   $route() {
+  //     this.fetchPosts();
+  //   }
+  // }
 }
 </script>
 
