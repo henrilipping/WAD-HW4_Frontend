@@ -23,7 +23,7 @@ export default {
     };
   },
   methods: {
-    fetchPost(id) { // for getting a single post 
+    fetchPost(id) { // for getting a single post. Used AI for debugging, finding why text was not displayed in the textarea. Used it to help write some checks to see where the program was running into problems. (Helped come to the realization that the backend had not been restarted after modifications.)
       console.log("Fetching post with ID: ", id)
       fetch(`http://localhost:3000/posts/${id}`, {
           credentials: 'include'
