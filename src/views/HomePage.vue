@@ -52,7 +52,7 @@ export default {
       });
     },
 
-    async fetchPosts() {
+    fetchPosts() {
       fetch('http://localhost:3000/posts', {
           credentials: 'include'
         })
@@ -80,7 +80,7 @@ export default {
       this.$router.push("/addpost");
     },
 
-    async deleteAllPosts() {
+    deleteAllPosts() {
       fetch("http://localhost:3000/posts", {
         method: "DELETE",
         credentials: 'include'
