@@ -59,7 +59,7 @@ export default {
         .catch(err => console.log(err.message))
     },
 
-    formatDate(dateString) {
+    formatDate(dateString) { //method to get the date into the right format, used AI help to write code (prompt: how to format a date from a generated string to the form Dec 2, 2025 in .vue)
       const date = new Date(dateString);
       return date.toLocaleString(
         'en-US', {
