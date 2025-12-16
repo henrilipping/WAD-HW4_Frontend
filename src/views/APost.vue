@@ -31,8 +31,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log("Fetched post: ", data.body);
-          this.post.id = data.id;
-          this.post.body = data.body;
+          this.post = data;
         })
         .catch((err) => console.log(err.message))
     },
