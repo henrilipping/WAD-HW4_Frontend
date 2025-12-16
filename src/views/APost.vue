@@ -29,10 +29,7 @@ export default {
           credentials: 'include'
         })
         .then((response) => response.json())
-        .then((data) => {
-          console.log("Fetched post: ", data.body);
-          this.post = data;
-        })
+        .then((data) => (this.post = data))
         .catch((err) => console.log(err.message))
     },
     
