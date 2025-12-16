@@ -3,7 +3,7 @@
     <h3>A Post</h3>
     <div class="row">
       <label for="body">Body</label>
-      <textarea name="body" v-model="post.body"></textarea>
+      <textarea name="body" v-model="post.body"></textarea> <!--used AI to find how to get the text from the post to the textarea (prompt: In html how to show an element's (fetched from database) body text in a textarea.-->
     </div>
     <div class="container">
       <button @click="updatePost" class="center">Update</button>
@@ -23,7 +23,7 @@ export default {
     };
   },
   methods: {
-    fetchPost(id) {
+    fetchPost(id) { // for getting a single post 
       console.log("Fetching post with ID: ", id)
       fetch(`http://localhost:3000/posts/${id}`, {
           credentials: 'include'
