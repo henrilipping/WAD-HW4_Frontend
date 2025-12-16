@@ -41,7 +41,7 @@ export default {
           .then(async (response) => {
             const data = await response.json();
             
-            if (!response.ok) {
+            if (!response.ok) { // response is flase when status code is >400
               console.log(data.error);
               alert(data.error); // used AI to find how to show user an alert.
               this.$router.push("/");
