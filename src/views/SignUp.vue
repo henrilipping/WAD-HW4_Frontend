@@ -38,8 +38,16 @@ export default {
         credentials: "include", // enabled cookies
         body: JSON.stringify(data),
       })
-          .then((response) => response.json())
-          .then((data) => {
+          .then(async (response) => {
+            const data = await response.json();
+            
+            if (!response.ok) {
+              console.log(data.error);
+              alert(data.error); // used AI to find how to show user an alert.
+              this.$router.push("/");
+              return;
+            }
+
             console.log(data);
             this.$router.push("/");
           })
